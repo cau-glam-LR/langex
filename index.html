@@ -327,7 +327,7 @@
         const btn = document.createElement('button');
         btn.type = 'button';
         btn.className = 'time-slot-btn';
-        btn.innerText = `${time} – ${fmtTime(toMinutes(time) + config.slotMinutes)}`;
+        btn.innerText = time;
         btn.onclick = () => {
           timeOptions.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('selected'));
           btn.classList.add('selected');
