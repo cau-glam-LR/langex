@@ -23,7 +23,7 @@ button, input, select, textarea { font-family: inherit; letter-spacing: inherit;
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(32, 43, 60, 0.04);
   padding: 28px 28px;
-  margin-bottom: 16px;
+  margin-bottom: 22px;
 }
 .card.title-card { padding: 0; overflow: hidden; }
 .title-content { padding: 28px; }
@@ -81,7 +81,7 @@ button:disabled { background-color: #c5d9fb; cursor: wait; }
 .empty .cal-day-inner { cursor: default; }
 
 /* Time slots: equal-size grid, 4 per row */
-#time-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+#time-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 .time-slot-btn {
   margin: 0; padding: 0; height: 44px; width: 100%;
   background-color: #fff; color: #202B3C;
@@ -148,7 +148,7 @@ button:disabled { background-color: #c5d9fb; cursor: wait; }
 /* ===================== Phones ===================== */
 @media (max-width: 600px) {
   body { padding: 12px 12px 24px; font-size: 14.5px; }
-  .card { padding: 22px 20px; margin-bottom: 12px; border-radius: 12px; }
+  .card { padding: 22px 20px; margin-bottom: 18px; border-radius: 12px; }
   .title-content { padding: 22px 20px; }
   .title-content h1 { font-size: 21px; }
   label { font-size: 15.5px; margin-bottom: 12px; }
