@@ -1,0 +1,466 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>언어교환 프로그램 예약 (Reservation of Language Exchange Program)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="card title-card">
+      <img src="header_image.png" alt="중앙대학교 언어교환 프로그램" class="main-header-img">
+      <div class="title-content">
+        <h1>
+           언어교환 프로그램 예약<br>
+          <span style="font-size: 0.85em; word-break: keep-all;">(Reservation of Language Exchange Program)</span>
+        </h1>
+
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
+
+        <p style="line-height: 1.6; word-break: keep-all;">
+          안녕하세요, 중앙대학교 국제학생홍보대사 GLAM(Global Ambassador of CAU)입니다.<br><br>
+
+          저희 GLAM은 중앙대학교에 재학 중인 한국인 학생들과 외국인 학생들이 서로의 문화를 이해하고 언어 능력을 향상시킬 수 있도록 언어교환 프로그램(Language Exchange Program)을 운영하고 있습니다.<br><br>
+
+          이 프로그램을 통해 여러분은 원하시는 언어를 직접 사용하며 대화를 나누고, 새로운 친구를 사귀며 글로벌 감각을 키울 수 있습니다.<br><br>
+
+          아래 양식은 언어교환 프로그램 참여를 위한 예약 신청서입니다.<br>
+          작성해주신 정보를 바탕으로, 익일 오전 10시에 안내 문자를 발송해드릴 예정이니 아래 항목을 작성 부탁드립니다.<br><br>
+
+          Hello, this is GLAM (Global Ambassador of CAU).<br>
+          The form below is a reservation form for participation in the Language Exchange Program.<br>
+          Based on the information you provide, we will send you a confirmation message at 10:00 a.m. the following day. Please complete the required fields below.
+        </p>
+      </div>
+    </div>
+
+    <!-- novalidate: 브라우저 기본 경고창 대신 아래 커스텀 에러를 사용합니다 -->
+    <form id="reservation-form" novalidate>
+      <div class="card"><label for="user-name">성함 &nbsp; Name</label><input type="text" id="user-name" maxlength="50" autocomplete="name" required></div>
+      <div class="card"><label for="user-dept">학과 &nbsp; Department</label><input type="text" id="user-dept" maxlength="80" required></div>
+      <div class="card"><label for="user-phone">전화번호 &nbsp; Phone Number</label><input type="tel" id="user-phone" placeholder="010-0000-0000" maxlength="13" inputmode="numeric" autocomplete="tel" required data-check="phone"></div>
+
+      <div class="card">
+        <label>원하는 언어를 선택해주세요<br>Preferred Language for Exchange</label>
+        <p class="hint-text">언어를 먼저 선택해야 달력이 활성화됩니다.<br>Please choose a language first to see available dates.</p>
+        <div id="language-options"><p class="loading-text">불러오는 중… / Loading…</p></div>
+      </div>
+
+      <div class="card">
+        <label>예약 날짜 선택<br>Select a Date</label>
+        <div id="calendar-container"></div>
+        <input type="hidden" id="selected-date-value" required>
+      </div>
+
+      <div class="card" id="time-card" style="display:none;">
+        <label>시간 선택<br>Select a Time</label>
+        <div id="time-options"></div>
+        <input type="hidden" id="selected-time" required>
+      </div>
+
+      <!-- GCC 이용 안내 카드 -->
+      <div class="card notice-card">
+        <input type="radio" name="notice-tab" id="tab-ko" checked>
+        <input type="radio" name="notice-tab" id="tab-en">
+
+        <div class="notice-tab-container">
+          <div class="notice-tabs">
+            <label for="tab-ko" class="tab-label"><span class="tab-text">KR 한국어</span></label>
+            <label for="tab-en" class="tab-label"><span class="tab-text">EN English</span></label>
+          </div>
+        </div>
+
+        <div class="notice-content notice-ko">
+          <h3 class="notice-main-title">&lt; GCC 이용 안내 &gt; 꼭 한 번 읽어주세요!</h3>
+          <p class="notice-desc">GCC는 모두가 함께 사용하는 공공 공간입니다.<br>원활하고 쾌적한 운영을 위해 아래 사항을 꼭 지켜주시기 바랍니다.</p>
+
+          <h4 class="notice-sub-title">1. 언어 사용 및 표현에 대한 유의사항</h4>
+          <p class="notice-text">GCC 내에서는 상대방을 존중하지 않는 언행(욕설, 성희롱, 차별적 표현 등)은 엄격히 금지됩니다.<br>
+          정치적 발언, 특정 국가 및 개인을 향한 비방 등 타인을 불편하게 만들 수 있는 주제 또한 금지됩니다.<br>
+          언어 교환 프로그램 진행 중 운영 스태프가 불쾌감을 호소할 경우, 해당 참여자는 언어 교환 프로그램 참여 제한 및 GCC 출입 제한 조치를 받을 수 있습니다.<br>
+          과도한 소음으로 인해 다른 이용자가 불편함을 느낄 경우, GCC 이용이 제한될 수 있습니다.</p>
+
+          <h4 class="notice-sub-title">2. 공용 물품 및 시설물 사용 수칙</h4>
+          <p class="notice-text">책상, 의자, 어댑터, 보드게임 등 GCC 내 공용 물품은 모두가 함께 사용하는 자산입니다. 사용 시에는 소중히 다뤄 주시고, 사용 후 반드시 제자리에 정리해 주세요.<br>
+          냄새가 강한 음식 섭취는 GCC 외부 공간을 이용해 주시길 바랍니다.<br>
+          쾌적한 환경 유지를 위해 여러분의 책임 있는 사용을 부탁드립니다.<br>
+          스태프실은 출입 금지 구역입니다. 필요한 보드게임 또는 물품이 있으시면 GLAM에게 말씀해 주세요.</p>
+
+          <h4 class="notice-sub-title">3. 입퇴장 시 주의 사항</h4>
+          <p class="notice-text">이용 중 발생한 음식물, 음료 등 개인 물품은 본인이 직접 정리 및 폐기해 주시기 바랍니다.<br>
+          퇴장 시에는 소지품을 잘 챙기고, 사용한 자리를 깔끔하게 정돈해 주세요.</p>
+
+          <h4 class="notice-sub-title">4. GCC에서의 외부 활동 및 홍보 관련 유의사항</h4>
+          <p class="notice-text">다음과 같은 행위는 원칙적으로 금지됩니다.<br>
+          - 특정 단체의 활동만을 목적으로 한 GCC 이용<br>
+          - 중앙 동아리를 제외한 기타 단체 가입을 종용하는 행위<br>
+          - 교외 활동과 관련된 전단 배부 또는 홍보 활동</p>
+
+          <h4 class="notice-sub-title warning">🚨 투아웃 제도 및 이용 제한 기준 안내</h4>
+          <p class="notice-text">다음과 같은 경우 투아웃 제도에 따라 이용 제한 조치가 취해질 수 있습니다:<br>
+          - GCC 이용 수칙을 2회 이상 위반한 경우<br>
+          - 타인에게 지속적으로 불쾌함이나 피해를 주는 행동을 반복한 경우<br>
+          위반 시에는 GCC 출입 제한 또는 국제처 주최 행사에 참여 제한 등의 불이익이 발생할 수 있으므로 각별한 주의를 부탁드립니다.</p>
+        </div>
+
+        <div class="notice-content notice-en">
+          <h3 class="notice-main-title">&lt; GCC Usage Guidelines &gt; Please read carefully!</h3>
+          <p class="notice-desc">The GCC is a public space shared by everyone.<br>For smooth and pleasant operation, please observe the following guidelines.</p>
+
+          <h4 class="notice-sub-title">1. Guidelines on Language and Expression</h4>
+          <p class="notice-text">Disrespectful speech or behavior (such as swearing, sexual harassment, and discriminatory remarks) is strictly prohibited within the GCC.<br>
+          Topics that may cause discomfort to others, such as political statements or slander directed at specific countries or individuals, are also prohibited.<br>
+          If operating staff report discomfort during a language exchange program, the participant may face restrictions on participating in the program and entering the GCC.<br>
+          If excessive noise causes discomfort to other users, GCC access may be restricted.</p>
+
+          <h4 class="notice-sub-title">2. Rules for Using Public Items and Facilities</h4>
+          <p class="notice-text">Public items in the GCC, such as desks, chairs, adapters, and board games, are shared assets. Please treat them with care and return them to their original places after use.<br>
+          Please consume strong-smelling food outside the GCC.<br>
+          We ask for your responsible use to maintain a pleasant environment.<br>
+          The staff room is a restricted area. If you need a board game or item, please ask GLAM.</p>
+
+          <h4 class="notice-sub-title">3. Precautions When Entering and Leaving</h4>
+          <p class="notice-text">Please clean up and dispose of any personal items, such as food and drinks, generated during your use.<br>
+          When leaving, please take your belongings and tidy up your space.</p>
+
+          <h4 class="notice-sub-title">4. Guidelines for External Activities and Promotion at the GCC</h4>
+          <p class="notice-text">The following activities are prohibited in principle:<br>
+          - Using the GCC solely for the activities of a specific organization<br>
+          - Encouraging individuals to join organizations other than central clubs<br>
+          - Distributing flyers or conducting promotional activities related to off-campus activities</p>
+
+          <h4 class="notice-sub-title warning">🚨 Two-Out Policy and Access Restriction Criteria</h4>
+          <p class="notice-text">In the following cases, access restrictions may be applied in accordance with the two-out policy:<br>
+          - Violating the GCC usage rules two or more times<br>
+          - Repeatedly engaging in behavior that consistently causes discomfort or harm to others<br>
+          Violations may result in disadvantages, such as restricted access to the GCC or restricted participation in events hosted by the Office of International Affairs, so please be particularly careful.</p>
+        </div>
+      </div>
+
+      <!-- 동의 체크 카드 -->
+      <div class="card">
+        <p class="consent-text" style="margin-bottom: 15px; word-break: keep-all;">
+          「본 언어교환 프로그램 운영을 위해 성명, 연락처, 관심 언어 등 개인정보를 수집·이용합니다. 수집된 정보는 프로그램 운영 목적 외에는 사용되지 않으며, 프로그램 종료 시 안전하게 폐기됩니다. 개인정보 제공에 동의하지 않으실 경우 참여가 제한될 수 있습니다.」
+        </p>
+        <p class="consent-text" style="margin-bottom: 25px;">
+          「We collect and use personal information, including your name, contact details, and preferred language, to operate this Language Exchange Program. The information will not be used for any other purpose and will be securely deleted when the program ends. If you do not consent, you may not be able to participate.」
+        </p>
+        <label class="checkbox-group">
+          <input type="checkbox" id="consent-checkbox" required>
+          <div class="checkbox-text">
+            <span>위 내용에 동의하시면 체크박스를 눌러주시기 바랍니다.</span>
+            <span class="en-checkbox-text">Please check the box if you agree.</span>
+          </div>
+        </label>
+      </div>
+
+      <div style="text-align: right; margin-bottom: 50px;"><button type="submit" id="submit-btn">예약하기 · Reserve</button></div>
+    </form>
+  </div>
+
+  <script>
+    /* ==========================================================
+       ⚙️ 관리자 설정 / ADMIN SETTING
+       Google Apps Script 웹 앱 URL (배포 > 웹 앱 URL)
+       Paste the web-app URL from Apps Script (Deploy > Web app URL)
+       ========================================================== */
+    const API_URL = 'PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE';
+
+    const ERROR_IMG = 'error_image.png';
+    const MSG = {
+      required: '이 항목을 입력해주세요! · This field is required.',
+      phone: '010-0000-0000 형식으로 입력해주세요. · Please use the format 010-0000-0000.',
+      loadFail: '예약 정보를 불러오지 못했습니다. 잠시 후 새로고침 해주세요.<br>Could not load the schedule. Please refresh the page in a moment.',
+      noLang: '현재 예약 가능한 언어가 없습니다.<br>No languages are open for booking right now.',
+      slotGone: '선택하신 시간은 더 이상 예약할 수 없습니다. 다른 시간을 선택해주세요.\nThat time is no longer available. Please choose another time.',
+      submitFail: '예약 처리 중 오류가 발생했습니다. 다시 시도해주세요.\nSomething went wrong. Please try again.',
+    };
+
+    let config = null;
+    let selectedLang = null;
+    let selectedDateStr = null;
+    let calYear, calMonth; // month is 0-based
+
+    /* ---------- helpers ---------- */
+    const pad = n => String(n).padStart(2, '0');
+    const toMinutes = t => Number(t.slice(0, 2)) * 60 + Number(t.slice(3, 5));
+    const fmtTime = m => `${pad(Math.floor(m / 60))}:${pad(m % 60)}`;
+    const dayOfWeek = dateStr => new Date(dateStr + 'T00:00:00Z').getUTCDay();
+
+    /** weekly slots for that weekday − closures − times already passed today */
+    function slotsFor(lang, dateStr) {
+      if (!config || dateStr < config.windowStart || dateStr > config.windowEnd) return [];
+      const base = (config.weekly[lang] && config.weekly[lang][dayOfWeek(dateStr)]) || [];
+      return base.filter(t => {
+        const mins = toMinutes(t);
+        if (dateStr === config.today && mins <= config.nowMinutes) return false;
+        return !config.closures.some(c => {
+          if (c.date !== dateStr) return false;
+          if (c.language && c.language !== lang) return false;
+          const from = c.from ? toMinutes(c.from) : 0;
+          const to = c.to ? toMinutes(c.to) : 24 * 60;
+          return mins >= from && mins < to;
+        });
+      });
+    }
+
+    /* ---------- phone auto-hyphen ---------- */
+    document.getElementById('user-phone').addEventListener('input', e => {
+      let val = e.target.value.replace(/[^0-9]/g, '');
+      if (val.length > 3 && val.length <= 7) val = val.replace(/(\d{3})(\d+)/, '$1-$2');
+      else if (val.length > 7) val = val.replace(/(\d{3})(\d{4})(\d+)/, '$1-$2-$3');
+      e.target.value = val;
+    });
+
+    /* ---------- load schedule from the Google Sheet ---------- */
+    async function loadConfig() {
+      const res = await fetch(API_URL, { method: 'GET' });
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.message || 'config error');
+      return data;
+    }
+
+    async function initForm() {
+      const langContainer = document.getElementById('language-options');
+      try {
+        config = await loadConfig();
+      } catch (err) {
+        console.error(err);
+        langContainer.innerHTML = `<p class="hint-text">${MSG.loadFail}</p>`;
+        return;
+      }
+
+      langContainer.innerHTML = '';
+      if (!config.languages.length) {
+        langContainer.innerHTML = `<p class="hint-text">${MSG.noLang}</p>`;
+      }
+      config.languages.forEach(lang => {
+        const label = document.createElement('label');
+        label.className = 'radio-group';
+        const input = document.createElement('input');
+        input.type = 'radio'; input.name = 'language'; input.value = lang; input.required = true;
+        input.addEventListener('change', () => {
+          selectedLang = lang;
+          selectedDateStr = null;
+          document.getElementById('selected-date-value').value = '';
+          document.getElementById('selected-time').value = '';
+          document.getElementById('time-card').style.display = 'none';
+          renderCalendar();
+        });
+        label.append(input, document.createTextNode(' ' + lang));
+        langContainer.appendChild(label);
+      });
+
+      // open the calendar on the first bookable month
+      const start = config.windowStart > config.today ? config.windowStart : config.today;
+      calYear = Number(start.slice(0, 4));
+      calMonth = Number(start.slice(5, 7)) - 1;
+      renderCalendar();
+    }
+
+    /* ---------- calendar ---------- */
+    function monthKey(y, m) { return y * 12 + m; }
+
+    function renderCalendar() {
+      const calContainer = document.getElementById('calendar-container');
+      if (!config) return;
+      const firstDay = new Date(calYear, calMonth, 1).getDay();
+      const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+
+      const minKey = monthKey(Number(config.today.slice(0, 4)), Number(config.today.slice(5, 7)) - 1);
+      const maxKey = monthKey(Number(config.windowEnd.slice(0, 4)), Number(config.windowEnd.slice(5, 7)) - 1);
+      const curKey = monthKey(calYear, calMonth);
+
+      let html = `<div class="calendar-header">
+          <span class="cal-nav ${curKey <= minKey ? 'cal-nav-disabled' : ''}" id="prev-month">&lt;</span>
+          <span>${calYear}년 ${calMonth + 1}월</span>
+          <span class="cal-nav ${curKey >= maxKey ? 'cal-nav-disabled' : ''}" id="next-month">&gt;</span>
+        </div>
+        <table class="calendar"><tr><th style="color:#dc3545;">SUN</th><th>MON</th><th>TUE</th><th>WED</th><th>THU</th><th>FRI</th><th style="color:#007bff;">SAT</th></tr><tr>`;
+
+      let dayCount = 1;
+      const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+      for (let i = 0; i < totalCells; i++) {
+        if (i < firstDay || dayCount > daysInMonth) {
+          html += `<td class="empty"><div class="cal-day-inner"></div></td>`;
+        } else {
+          const dateStr = `${calYear}-${pad(calMonth + 1)}-${pad(dayCount)}`;
+          const open = selectedLang && slotsFor(selectedLang, dateStr).length > 0;
+          let classes = open ? 'active-day' : 'disabled-day';
+          if (selectedDateStr === dateStr) classes += ' selected-day';
+          html += `<td class="${classes}" data-date="${dateStr}"><div class="cal-day-inner">${dayCount}</div></td>`;
+          dayCount++;
+        }
+        if ((i + 1) % 7 === 0) html += (i === totalCells - 1) ? `</tr>` : `</tr><tr>`;
+      }
+      html += `</table>`;
+      calContainer.innerHTML = html;
+
+      document.getElementById('prev-month').onclick = () => {
+        if (monthKey(calYear, calMonth) <= minKey) return;
+        calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; } renderCalendar();
+      };
+      document.getElementById('next-month').onclick = () => {
+        if (monthKey(calYear, calMonth) >= maxKey) return;
+        calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; } renderCalendar();
+      };
+
+      calContainer.querySelectorAll('.active-day').forEach(cell => {
+        cell.addEventListener('click', () => selectDate(cell.dataset.date));
+      });
+    }
+
+    function selectDate(dateStr) {
+      selectedDateStr = dateStr;
+      document.getElementById('selected-date-value').value = dateStr;
+      renderCalendar();
+
+      const timeCard = document.getElementById('time-card');
+      const timeOptions = document.getElementById('time-options');
+      timeCard.style.display = 'block';
+      timeOptions.innerHTML = '';
+      document.getElementById('selected-time').value = '';
+
+      slotsFor(selectedLang, dateStr).forEach(time => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'time-slot-btn';
+        btn.innerText = `${time} – ${fmtTime(toMinutes(time) + config.slotMinutes)}`;
+        btn.onclick = () => {
+          timeOptions.querySelectorAll('.time-slot-btn').forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          document.getElementById('selected-time').value = time;
+        };
+        timeOptions.appendChild(btn);
+      });
+    }
+
+    /* ---------- validation + submit ---------- */
+    function clearCardError(el) {
+      const card = el && el.closest('.card');
+      if (!card) return;
+      card.querySelectorAll('.custom-error').forEach(x => x.remove());
+      card.classList.remove('error-highlight');
+      card.querySelectorAll('.error-highlight').forEach(x => x.classList.remove('error-highlight'));
+    }
+    document.getElementById('reservation-form').addEventListener('input', e => clearCardError(e.target));
+    document.getElementById('reservation-form').addEventListener('change', e => clearCardError(e.target));
+    document.getElementById('calendar-container').addEventListener('click', e => {
+      if (e.target.closest('.active-day')) clearCardError(document.getElementById('calendar-container'));
+    });
+    document.getElementById('time-options').addEventListener('click', e => {
+      if (e.target.closest('.time-slot-btn')) clearCardError(document.getElementById('time-options'));
+    });
+
+    function showError(input, message) {
+      const card = input.closest('.card');
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'custom-error';
+      errorDiv.innerHTML = `<img src="${ERROR_IMG}" alt="!"> <span></span>`;
+      errorDiv.querySelector('span').textContent = message;
+
+      if (['radio', 'checkbox', 'hidden'].includes(input.type)) {
+        if (card) {
+          card.classList.add('error-highlight');
+          if (!card.querySelector('.custom-error')) card.appendChild(errorDiv);
+        }
+      } else {
+        input.classList.add('error-highlight');
+        input.parentNode.insertBefore(errorDiv, input.nextSibling);
+      }
+    }
+
+    document.getElementById('reservation-form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const form = e.target;
+      form.querySelectorAll('.custom-error').forEach(el => el.remove());
+      form.querySelectorAll('.error-highlight').forEach(el => el.classList.remove('error-highlight'));
+
+      let firstInvalid = null;
+      const seenRadios = {};
+      form.querySelectorAll('[required]').forEach(input => {
+        let message = null;
+        if (input.type === 'radio') {
+          if (seenRadios[input.name]) return;
+          seenRadios[input.name] = true;
+          if (!form.querySelector(`input[name="${input.name}"]:checked`)) message = MSG.required;
+        } else if (input.type === 'checkbox') {
+          if (!input.checked) message = MSG.required;
+        } else if (!input.value.trim()) {
+          message = MSG.required;
+        } else if (input.dataset.check === 'phone' && !/^01\d-\d{3,4}-\d{4}$/.test(input.value.trim())) {
+          message = MSG.phone;
+        }
+        if (message) {
+          showError(input, message);
+          if (!firstInvalid) firstInvalid = input;
+        }
+      });
+
+      // language list failed to load → no radios exist at all
+      if (!form.querySelector('input[name="language"]') && !firstInvalid) {
+        alert(MSG.submitFail);
+        return;
+      }
+
+      if (firstInvalid) {
+        if (['hidden', 'radio', 'checkbox'].includes(firstInvalid.type)) {
+          firstInvalid.closest('.card').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstInvalid.focus();
+        }
+        return;
+      }
+
+      const reservation = {
+        name: document.getElementById('user-name').value.trim(),
+        department: document.getElementById('user-dept').value.trim(),
+        phone: document.getElementById('user-phone').value.trim(),
+        language: selectedLang,
+        date: selectedDateStr,
+        time: document.getElementById('selected-time').value,
+      };
+
+      const btn = document.getElementById('submit-btn');
+      btn.disabled = true;
+      btn.innerText = '예약 중… · Submitting…';
+
+      try {
+        // text/plain avoids a CORS pre-flight request, which Apps Script can't answer
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(reservation),
+        });
+        const result = await res.json();
+
+        if (result.ok) {
+          const q = new URLSearchParams({ lang: reservation.language, date: reservation.date, time: reservation.time });
+          window.location.href = 'success.html?' + q.toString();
+          return;
+        }
+        if (result.code === 'SLOT_UNAVAILABLE') {
+          alert(MSG.slotGone);
+          config = await loadConfig();
+          selectedDateStr = null;
+          document.getElementById('selected-date-value').value = '';
+          document.getElementById('time-card').style.display = 'none';
+          renderCalendar();
+        } else {
+          alert(MSG.submitFail);
+        }
+      } catch (err) {
+        console.error(err);
+        alert(MSG.submitFail);
+      }
+      btn.disabled = false;
+      btn.innerText = '예약하기 · Reserve';
+    });
+
+    initForm();
+  </script>
+</body>
+</html>
