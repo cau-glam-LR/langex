@@ -8,33 +8,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container" style="text-align: center; margin-top: 40px; max-width: 880px;">
-    <div class="card title-card" style="padding-top: 40px; padding-bottom: 50px;">
-      <h1 style="color: #4384ec; font-size: 30px; margin-top: 10px;">예약이 완료되었습니다!</h1>
-      <p style="font-size: 16px; margin-top: 15px;">언어교환 프로그램 예약이 성공적으로 접수되었습니다.<br>Your reservation has been received.</p>
+  <div class="container success-container">
+    <div class="card success-card">
+      <h1 class="success-title">예약이 완료되었습니다!</h1>
+      <p class="success-sub">언어교환 프로그램 예약이 성공적으로 접수되었습니다.<br>Your reservation has been received.</p>
 
-      <!-- 예약 요약 박스 -->
-      <div class="summary-container" id="reservation-summary" style="display:none;">
-        <div class="summary-box">
-          <div class="summary-icon summary-icon-text">🌐</div>
-          <div class="summary-text">
-            <span>Language</span>
-            <strong id="summary-lang"></strong>
-          </div>
-        </div>
-        <div class="summary-box">
-          <div class="summary-icon">
-            <img src="date_image.png" alt="날짜" style="width:90%; height:90%; object-fit:cover; border-radius:10px;">
-          </div>
+      <!-- 예약 요약: 날짜(위) / 언어 · 시간(아래) -->
+      <div class="summary-grid" id="reservation-summary" style="display:none;">
+        <div class="summary-box summary-date">
+          <div class="summary-icon"><img src="date_image.png" alt="날짜"></div>
           <div class="summary-text">
             <span>Date</span>
             <strong id="summary-date"></strong>
           </div>
         </div>
         <div class="summary-box">
-          <div class="summary-icon">
-            <img src="time_image.png" alt="시간" style="width:90%; height:90%; object-fit:cover; border-radius:10px;">
+          <div class="summary-icon summary-icon-emoji">🌐</div>
+          <div class="summary-text">
+            <span>Language</span>
+            <strong id="summary-lang"></strong>
           </div>
+        </div>
+        <div class="summary-box">
+          <div class="summary-icon"><img src="time_image.png" alt="시간"></div>
           <div class="summary-text">
             <span>Time</span>
             <strong id="summary-time"></strong>
@@ -42,9 +38,12 @@
         </div>
       </div>
 
-      <p style="font-size: 14px;">익일 오전 10시에 안내 문자를 보내드립니다.<br>We will text you a confirmation at 10:00 a.m. the next day.</p>
+      <p class="success-note">
+        <span>익일 오전 10시에 안내 문자를 보내드립니다.</span>
+        <span>We will text you a confirmation at 10:00 a.m. the next day.</span>
+      </p>
 
-      <button onclick="window.location.href='index.html'" style="margin-top: 20px;">새로운 예약하기 · New Reservation</button>
+      <button class="success-btn" onclick="window.location.href='index.html'">새로운 예약하기 · New Reservation</button>
     </div>
   </div>
 
@@ -61,7 +60,7 @@
       document.getElementById('summary-lang').textContent = lang;
       document.getElementById('summary-date').textContent = `${y}년 ${m}월 ${d}일 (${weekday})`;
       document.getElementById('summary-time').textContent = time;
-      document.getElementById('reservation-summary').style.display = 'flex';
+      document.getElementById('reservation-summary').style.display = 'grid';
     }
   </script>
 </body>
